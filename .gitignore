@@ -1,0 +1,9 @@
+/build
+/build_advisor
+/proj1/build_advisor
+/proj1/build_evaluate
+*.pbs
+AVS-Advisor.*
+*.zip
+*.tar
+*.gz

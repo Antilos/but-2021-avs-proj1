@@ -1,0 +1,35 @@
+#### Stručně odpovězte na následující otázky: ######
+
+1. Proč je nutné určovat, zda má výpočet pokračovat?
+==============================================================================
+Ďalšie iterácie (iterácie po dosiahnutí cielovej hodnoty v každej položke) by boli zbytočné, keďže by výsledok už nezmenili.
+
+
+2. Byla "Line" vektorizace efektivní? Proč?
+==============================================================================
+V mojeje implementácii nebola Line vektorizácia príliš efektívna.
+Úprimne neviem prečo. Advisor reportoval dva problémi: Existenciu skalárneho remainder loopu (v ktorom ale nebolo stráveného príliš vela času) a "invalid use of reduction variable".
+Prvý problém by sa dal odstrániť pridaním paddingu (čo som ale nespravil). Dúfal som že AVX512 využije na riešenie tohto problému maskovanie, čo sa ale nestalo, a nepodarilo sa mi zistiť ako ho k tomu donútiť.
+Druhý problém je pre mňa záhadou, nakolko sa mi nepodarilo v žiadnej dokumentácii nájsť čo to môže znamenať, a redukcia ako taká funguje. Podozieram ten remainder loop.
+
+
+3. Jaká byla dosažena výkonnost v Intel Advisoru pro jednotlivé implementace 
+(v GFLOPS)?
+==============================================================================
+Ref:2.3
+Line:10.16
+Batch:8.36
+
+
+4. Jaká část kódu byla paralizována v "Line" implementaci? Vyčteme tuto 
+informaci i u batch kalkulátoru?
+==============================================================================
+Časť označená pragmou simd, a iné časti ktoré sa kompilátor rozhodol vektorizovať automaticky. 
+Túto informáciu zistímez .optrpt súborov, alebo z Advisoru. Zistíme ju aj pri batch kalkulátore.
+
+
+5. Co vyčteme z Roofline modelu pro obě vektorizované implementace?
+==============================================================================
+Z roofline modelu zistíme či je výkon brzdený aritmetickou zložitosťou alebo prístupmi do pamäti, prípadne obe, a ktoré prístupi do pamäti brzdia výkon.
+
+
